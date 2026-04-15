@@ -1,0 +1,50 @@
+gap_follow:
+  ros__parameters:
+    control_rate_hz:  50.0
+    estop_min_dist:   0.5    # [m]
+    estop_angle_deg: 75.0    # [deg]
+    gf_bubble_radius: 0.5  # [m]
+    gf_speed:         3.0    # [m/s]
+    gf_max_steer:     0.6    # [rad]
+    gf_max_range:    15.0    # [m]
+
+wall_follow:
+  ros__parameters:
+    control_rate_hz:  50.0
+    estop_min_dist:   0.5    # [m]
+    estop_angle_deg: 30.0    # [deg]
+    wf_target_dist:   0.8    # desired gap from right wall [m]
+    wf_kp:            1.0
+    wf_kd:            0.1
+    wf_speed:         1.5    # [m/s]
+    wf_max_steer:     0.4    # [rad]
+    wf_lookahead:     0.5    # [m]
+
+reactive_pure_pursuit:
+  ros__parameters:
+    control_rate_hz:   50.0
+    estop_angle_deg:   50.0    # [deg] EStop 전방 탐지 반각
+    
+    # Disparity Extender
+    safety_margin:     0.2   # [m] disparity 패딩 여유 거리 (안정성 강화)
+    disparity_th:      0.50    # [m] 인접 빔 차이 임계값
+    max_range:         10.0    # [m] LiDAR 최대 유효 거리
+    # 조향
+    # 조향
+    max_steer:         0.55    # [rad] 최대 조향각 (F1Tenth 물리 한계 ~0.6)
+    virtual_lookahead: 1.2  # 타이트한 맵에서 빠르게 반응하도록 짧게 설정
+    fov_deg:           135.0   # [deg] 시야각 반각
+    # 속도
+    max_speed:         8.0     # [m/s] 직선 최고속
+    min_speed:         5.0     # [m/s] 코너 최저속
+    brake_dist:        5.0     # [m] 감속 시작 전방 거리
+    # Gap 탐색 & 제어
+    min_gap_width_deg: 10.0    # [deg] 최소 gap 각도 폭
+    min_clearance:     0.25    # [m] 통과 가능 최소 거리 (좁은 맵 대응)
+    angle_bias:        0.8    # gap 선택 시 직진 편향 (0=없음, 1=강함)
+    heading_bias:      1.2   # 벡터합 직진 편향 지수 (클수록 최소 회전 경로)
+    denoise_window:    3       # 이동평균 윈도우 (빔 수, 홀수 권장)
+    max_steer_rate:    0.25    # [rad/frame] 프레임당 최대 조향 변화 (빠르되 안정적)
+    midline_alpha:     0.25   # 중앙선 블렌딩 (0=외벽 치우침, 0.55=중앙 약간 안전, 1=순수 중앙)
+
+
